@@ -1,0 +1,7 @@
+print('Hello World!')
+name = input('My name is ')
+print(f'Hello, {name}!')
+name = input('What is your name? ')
+print(f'Nice to meet you, {name}!')
+x = int(25)
+print(f'I am {x} years old.')
