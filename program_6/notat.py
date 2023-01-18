@@ -24,16 +24,36 @@ def notes_or_0(note_list: list):
         print('> Список з нотатками пустий!')
 
 
-def how_note_print():
+def how_note_print(note_list):
     """
-    Цикл, до того момоменту, поки не буде введено ціле число від одного
+    Цикл, до того момоменту, поки не буде введено ціле число від одного до кількості в списку
     :return: повертає число, потім скільки записів буде виведено
     """
+    len_note = len(note_list)   # рахує кількість нотатків списку
     while True:
         try:
             how_print = int(input('>>> '))
-            if how_print > 0:
+            if len_note >= how_print > 0:    # якщо нотатків стількі скіли є в списку -> виводить
                 return how_print
+            elif len_note < how_print:   # якщо запит на більше ніж ж є в списку, просить ввести скільки є в списку
+                print(f'>>> У вас всього {len_note} нотатків, введіть до цього числа!')
+            else:
+                print('>>> Ввдеіть значення від 1!')   # якщо не коректно введене число
+        except ValueError:
+            print('> Ввдеіть ціле число!')
+            continue
+
+
+def how_note():
+    """
+    Цикл, до того момоменту, поки не буде введено ціле число від одного
+    :return: повертає число, потім скільки записів буде введено
+    """
+    while True:
+        try:
+            how_input = int(input('>>> '))
+            if how_input > 0:
+                return how_input
             else:
                 print('>>> Ввдеіть значення від 1 !')
         except ValueError:
@@ -53,15 +73,15 @@ def user_input_note(key: tuple):
         # key - add
         if note == key[0]:
             print('>>> Скільки нотатків ви хочіте додати:')
-            how_print = how_note_print()
-            for x in range(how_print):
+            how_input = how_note()
+            for x in range(how_input):
                 notesss = input('> Введіть нотатку:')
                 note_list.append(notesss)    # додаємо в список
         # key - earliest
         elif note == key[1]:
             if notes_or_0(note_list):
                 print('>>> Скільки нотатків вивести:')
-                how_print = how_note_print()
+                how_print = how_note_print(note_list)
                 print('>>> Від найранішої до найпізнішої:')
                 for i in note_list[:how_print]:
                     print(f'> {i}')
@@ -69,7 +89,7 @@ def user_input_note(key: tuple):
         elif note == key[2]:
             if notes_or_0(note_list):
                 print('>>> Скільки нотатків вивести:')
-                how_print = how_note_print()
+                how_print = how_note_print(note_list)
                 print('>>> Від найпізнішої до найранішої:')
                 note_list_rever = list(reversed(note_list))   # reversed - перевертає список
                 for i in note_list_rever[:how_print]:
@@ -78,7 +98,7 @@ def user_input_note(key: tuple):
         elif note == key[3]:
             if notes_or_0(note_list):
                 print('>>> Скільки нотатків вивести:')
-                how_print = how_note_print()
+                how_print = how_note_print(note_list)
                 print('>>> Від найдовшої до найкоротшої:')
                 note_list_sort = sorted(note_list, key=len, reverse=True)  # sorted - сортирує список по довжині key
                 for i in note_list_sort[:how_print]:
@@ -87,7 +107,7 @@ def user_input_note(key: tuple):
         elif note == key[4]:
             if notes_or_0(note_list):
                 print('>>> Скільки нотатків вивести:')
-                how_print = how_note_print()
+                how_print = how_note_print(note_list)
                 print('>>> Від найкоротшої до найдовшої:')
                 note_list_sort = sorted(note_list, key=len)
                 for i in note_list_sort[:how_print]:
